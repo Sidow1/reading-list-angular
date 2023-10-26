@@ -1,0 +1,27 @@
+<section>
+  <h1>8 libros disponibles</h1>
+  <h4>2 en la lista de lectura</h4>
+  <p>Filtrar por páginas</p>
+  <input type="range" />
+  <p>Filtrar por género</p>
+  <input type="select" />
+</section>
+<section class="layout">
+  <div class="row">
+    <div class="card-group">
+      <div class="card" style="width: 18rem" *ngFor="let book of books">
+        <img [src]="book.cover" class="card-img-top" [alt]="book.title" />
+        <div class="card-body">
+          <h5 class="card-title">{{ book.title }}</h5>
+          <p class="card-text">
+            {{ book.synopsis }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<aside>
+  <h1>Lista de lectura</h1>
+</aside>
