@@ -43,4 +43,10 @@ export class BookListComponent {
       },
     },
   ];
+
+  public readingList: Book[] = [];
+
+  addToReadingList(book: Book) {
+    console.log(book);
+  }
 }
