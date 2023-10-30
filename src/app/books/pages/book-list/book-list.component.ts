@@ -1,52 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Book } from '../../interfaces/books.interface';
+import { BooksService } from '../../services/books.service';
 
 @Component({
   selector: 'app-book-list',
   templateUrl: './book-list.component.html',
   styleUrls: ['./book-list.component.css'],
 })
-export class BookListComponent {
-  public books: Book[] = [
-    {
-      title: 'El Señor de los Anillos',
-      pages: 1200,
-      genre: 'Fantasía',
-      cover:
-        'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1566425108i/33.jpg',
-      synopsis:
-        'Una aventura épica en un mundo de fantasía llamado la Tierra Media.',
-      year: 1954,
-      ISBN: '978-0618640157',
-      author: {
-        name: 'J.R.R. Tolkien',
-        otherBooks: ['El Hobbit', 'El Silmarillion'],
-      },
-    },
-    {
-      title: 'Juego de Tronos',
-      pages: 694,
-      genre: 'Fantasía',
-      cover:
-        'https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1273763400i/8189620.jpg',
-      synopsis:
-        'En un reino donde las estaciones duran años, una batalla épica por el trono se desarrolla.',
-      year: 1996,
-      ISBN: '978-0553103540',
-      author: {
-        name: 'George R. R. Martin',
-        otherBooks: [
-          'Choque de Reyes',
-          'Tormenta de Espadas',
-          'Festín de Cuervos',
-        ],
-      },
-    },
-  ];
-
+export class BookListComponent implements OnInit {
+  public books: Book[] = [];
   public readingList: Book[] = [];
+  public totalBooks: number = 0;
 
-  addToReadingList(book: Book) {
-    console.log(book);
+  constructor(private booksService: BooksService) {}
+  ngOnInit(): void {
+    this.booksService.getBooks().subscribe((books) => {
+      this.books = books;
+      this.totalBooks = books.length;
+    });
+  }
+
+  addToReadingList(book: Book): void {
+    if (this.readingList.includes(book)) return;
+
+    this.readingList.push(book);
+    this.totalBooks--;
+  }
+
+  deleteFromReadingList(book: Book): void {
+    const index = this.readingList.indexOf(book);
+    this.readingList.splice(index, 1);
+    this.totalBooks++;
+  }
+
+  isInReadingList(book: Book): boolean {
+    return this.readingList.includes(book);
   }
 }

@@ -1,34 +1,57 @@
-<section>
-  <h1>{{ books.length }} libros disponibles</h1>
-  <h4 *ngIf="readingList.length > 0">
-    {{ readingList.length }} en la lista de lectura
-  </h4>
-  <p>Filtrar por páginas</p>
-  <input type="range" />
-  <p>Filtrar por género</p>
-  <input type="select" />
-</section>
-<section class="layout">
-  <div class="row">
-    <div class="card-group">
+<div class="page-container">
+  <div class="left-section">
+    <h1>{{ totalBooks }} libros disponibles</h1>
+    <h4 *ngIf="readingList.length > 0">
+      {{ readingList.length }} en la lista de lectura
+    </h4>
+    <div class="filter">
+      <div>
+        <p>Filtrar por páginas</p>
+        <input type="range" />
+      </div>
+      <div>
+        <p>Filtrar por género</p>
+        <input type="select" />
+      </div>
+    </div>
+    <div class="card-container">
       <div class="card" style="width: 18rem" *ngFor="let book of books">
-        <img
-          [src]="book.cover"
-          class="card-img-top"
-          [alt]="book.title"
+        <div
+          class="card-content"
           (click)="addToReadingList(book)"
-        />
-        <div class="card-body">
-          <h5 class="card-title">{{ book.title }}</h5>
-          <p class="card-text">
-            {{ book.synopsis }}
-          </p>
+          [ngClass]="{
+            'in-reading-list': isInReadingList(book)
+          }"
+        >
+          <img [src]="book.cover" class="card-img-top" [alt]="book.title" />
+          <div class="card-body">
+            <h5 class="card-title">{{ book.title }}</h5>
+            <p class="card-text">
+              {{ book.synopsis }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</section>
 
-<aside>
-  <h1>Lista de lectura</h1>
-</aside>
+  <div class="right-section">
+    <aside *ngIf="readingList.length > 0">
+      <h1>Lista de lectura</h1>
+      <div class="card-container">
+        <div class="card" style="width: 18rem" *ngFor="let book of readingList">
+          <div class="card-content">
+            <img [src]="book.cover" class="card-img-top" [alt]="book.title" />
+            <button (click)="deleteFromReadingList(book)">X</button>
+            <div class="card-body">
+              <h5 class="card-title">{{ book.title }}</h5>
+              <p class="card-text">
+                {{ book.synopsis }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>

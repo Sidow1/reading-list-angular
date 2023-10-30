@@ -1,11 +1,68 @@
-.layout {
-  width: 1366px;
-  height: 768px;
-
+/* .layout {
+  width: 1100px;
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  grid-template-columns: 1fr 25%;
+  grid-gap: 20px;
+} */
 
-  justify-content: start;
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.card {
+  margin: 0.5rem;
+  cursor: pointer;
+  flex: 0 0 calc(25% - 1rem);
+}
+
+.in-reading-list {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+button {
+  cursor: pointer;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
+.filter {
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter div {
+  display: flex;
+  flex-direction: column;
+}
+
+.page-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-section {
+  flex: 1.5;
+  padding: 20px;
+}
+
+.right-section {
+  flex: 1;
+  padding: 20px;
+}
+
+.right-section .card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.right-section .card {
+  flex: 0 0 calc(33.33% - 20px);
+  margin: 0;
+  cursor: pointer;
 }
