@@ -7,11 +7,24 @@
     <div class="filter">
       <div>
         <p>Filtrar por páginas</p>
-        <input type="range" />
+        <input
+          type="range"
+          min="1"
+          max="1000"
+          [value]="pagesSlider"
+          (input)="pagesFilter($event)"
+        />
+        <p>{{ pagesSlider }} páginas o más</p>
       </div>
       <div>
         <p>Filtrar por género</p>
-        <input type="select" />
+
+        <select class="form-select" #genreSelect (change)="genreFilter()">
+          <option value="">-- Seleccione Género --</option>
+          <option *ngFor="let genre of genres" [value]="genre">
+            {{ genre }}
+          </option>
+        </select>
       </div>
     </div>
     <div class="card-container">
@@ -23,12 +36,20 @@
             'in-reading-list': isInReadingList(book)
           }"
         >
-          <img [src]="book.cover" class="card-img-top" [alt]="book.title" />
+          <img
+            [src]="book.cover"
+            class="card-img-top"
+            [alt]="book.title"
+            style="width: 198px; height: 300px; object-fit: cover"
+          />
           <div class="card-body">
             <h5 class="card-title">{{ book.title }}</h5>
             <p class="card-text">
               {{ book.synopsis }}
             </p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">{{ book.pages }} páginas</small>
           </div>
         </div>
       </div>
@@ -38,10 +59,21 @@
   <div class="right-section">
     <aside *ngIf="readingList.length > 0">
       <h1>Lista de lectura</h1>
-      <div class="card-container">
+      <div
+        class="card-container"
+        style="
+          box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset,
+            rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+        "
+      >
         <div class="card" style="width: 18rem" *ngFor="let book of readingList">
           <div class="card-content">
-            <img [src]="book.cover" class="card-img-top" [alt]="book.title" />
+            <img
+              [src]="book.cover"
+              class="card-img-top"
+              [alt]="book.title"
+              style="height: 250px; object-fit: cover"
+            />
             <button (click)="deleteFromReadingList(book)">X</button>
             <div class="card-body">
               <h5 class="card-title">{{ book.title }}</h5>

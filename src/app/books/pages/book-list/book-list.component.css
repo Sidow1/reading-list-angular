@@ -5,6 +5,12 @@
   grid-gap: 20px;
 } */
 
+h1,
+h4,
+h5 {
+  text-align: center;
+}
+
 .card-container {
   display: flex;
   flex-wrap: wrap;
@@ -37,6 +43,7 @@ button {
 .filter div {
   display: flex;
   flex-direction: column;
+  margin-right: 10px;
 }
 
 .page-container {
@@ -63,6 +70,6 @@ button {
 
 .right-section .card {
   flex: 0 0 calc(33.33% - 20px);
-  margin: 0;
+  margin: 3px;
   cursor: pointer;
 }
