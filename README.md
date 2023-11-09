@@ -2,7 +2,7 @@
 
 Respuesta a prueba técnica `https://github.com/midudev/pruebas-tecnicas/tree/main/pruebas/01-reading-list`, a modo de practica del lenguaje
 
-Deploy en GitHub Pages
+Deploy en Netlify https://reading-list-angular.netlify.app/books
 
 NOTA, falta
 
